@@ -1,6 +1,6 @@
 # javafx-ui &mdash; components for JavaFX
 
-See [more examples!](../javafx-ui-component/tree/master/javafx-ui-sample/src/main/java/javafx_ui_sample)
+See [more examples!](../tree/master/javafx-ui-sample/src/main/java/javafx_ui_sample)
 
 # ComboBoxChecked
 Simple wrapper for JavaFX ComboBox with check items.
