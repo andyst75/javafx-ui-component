@@ -150,7 +150,7 @@ public class ComboBoxFiltered<T> extends ComboBox<T> {
 	            moveCaretToPos = false;
 	        }
 	    });
-		
+
         setCellFactory(item -> {
 			ListCell<T> cell = new ListCell<T>() {
 				@Override

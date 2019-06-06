@@ -37,7 +37,7 @@ public class TableCellComboBoxFiltered <S,T> extends TableCell<S,T> {
 	
     private ComboBoxFiltered<T> comboBox;
     private ObservableList<T> items;
-    private TableCellComboBoxListViewSkin<?> skin; 
+    private TableCellComboBoxListViewSkin<T> skin; 
 
     public static <S,T> Callback<TableColumn<S,T>, TableCell<S,T>> forTableColumn(
             final StringConverter<T> converter,
@@ -76,6 +76,7 @@ public class TableCellComboBoxFiltered <S,T> extends TableCell<S,T> {
 		this.items = items;
 		comboBox = new ComboBoxFiltered<>(converter, items, matches);
 		skin = new TableCellComboBoxListViewSkin<>(comboBox);
+		comboBox.setSkin(skin);
         comboBox.setEditable(true);
         listWidthProperty().set(USE_PREF_SIZE);
         
@@ -114,7 +115,7 @@ public class TableCellComboBoxFiltered <S,T> extends TableCell<S,T> {
         }
 
         comboBox.getSelectionModel().select(getItem());
-        
+
         super.startEdit();
         setText(null);
         setGraphic(comboBox);
@@ -133,11 +134,11 @@ public class TableCellComboBoxFiltered <S,T> extends TableCell<S,T> {
     		StringConverter<T> sc = getConverter();
     		String text = comboBox.getEditor().getText();
             T value = sc.fromString(text);
-            
+
         	if (!isComboBoxListItemOnly()) {
         		cell.commitEdit(value);	
         	} else {
-        		// workaround for "bad" stringconverter - compare text only
+        		// workaround for wrong stringconverter - compare text only
         		for(T item:comboBox.getItems()) {
         			if (comboBox.getEditor().getText().equals(sc.toString(item))) {
         				cell.commitEdit(value);
@@ -161,7 +162,6 @@ public class TableCellComboBoxFiltered <S,T> extends TableCell<S,T> {
     	
         return false;
     }
-
 
     /**
      * Custom properties
